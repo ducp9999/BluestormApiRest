@@ -1,0 +1,5 @@
+pip install flask
+pip install bcrypt
+pip install pandas
+pip install pyodbc
+pip install requests
