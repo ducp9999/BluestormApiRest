@@ -56,11 +56,6 @@ def verify_key(user_key, user_password):
         conexao.close()
         # Verificar se a senha fornecida confere com a senha Hash do BD
         is_valid = bcrypt.check_password_hash (db_user_password, user_password)
-        # print(user_key)
-        # print(user_password)
-        # print(db_user_name)
-        # print(db_user_password)
-        # print(is_valid)
         return is_valid
     else: # Caso o ID fornecido não seja encontrado no BD, retornar falso
         return False
@@ -83,7 +78,6 @@ def root(): # função
 # localhost:5000/create?user=YYYY&senha=ZZZZ
 @app.route("/create", methods=['GET']) # decorator -> diz em qual link a função vai rodar
 def create(): # função
-    # id = request.args.get('id')
     usuario = request.args.get('user')
     senha = request.args.get('senha')
 
@@ -213,12 +207,10 @@ def id_transactions():
                         var_sql += f''' WHERE pharmacies.city = "{cidade}"'''
                     else:    
                         var_sql += f''' AND pharmacies.city = "{cidade}"'''
-            print(var_sql)            
             db_cnx = sqlite3.connect("./backend_test.db")
             df_transactions = pd.read_sql_query(var_sql, db_cnx, index_col=None)
             print(df_transactions)    
             dic_transactions = df_transactions.to_dict('index')
-            # print(dic_transactions)
             if dic_transactions: # Caso a transação desejada tenha sido encontrada
                 return dic_transactions
             else: # Mensagem de erro quando a transação desejada não foi encontrada
@@ -228,5 +220,4 @@ def id_transactions():
     else: # Mensagem de erro quando ID ou senha do usário não foram fornecidos
         return error("Falha na Autenticacao")
    
-
 app.run() #  app.run(host="0.0.0.0") 

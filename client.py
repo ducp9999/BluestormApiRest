@@ -1,22 +1,12 @@
 # API
 import requests
-# Bibliotecas Gerais
-import time
-from time import localtime
 
 def new_user(user_name, user_password):
     var_url = 'http://localhost:5000/create'
     if user_name and user_password :
         var_url += f'?user={user_name}&senha={user_password}'
-    inicio = time.time()
     users = requests.get(var_url)
     users_dic = users.json()
-    # print(cotacoes_dic)
-    fim = time.time()
-    hora = time.strftime("%Y-%m-%d %H:%M:%S", localtime())
-    # print(fim-inicio)
-    # print(hora)
-    # print(patients_dic)
     return users_dic
 
 def patients(user_id, user_password, patient_code=''):
@@ -25,15 +15,8 @@ def patients(user_id, user_password, patient_code=''):
         var_url += f'?chave={user_id}&senha={user_password}'
         if patient_code:
             var_url += f'&codigo={patient_code}' 
-    inicio = time.time()
     patients = requests.get(var_url)
     patients_dic = patients.json()
-    # print(cotacoes_dic)
-    fim = time.time()
-    hora = time.strftime("%Y-%m-%d %H:%M:%S", localtime())
-    # print(fim-inicio)
-    # print(hora)
-    # print(patients_dic)
     return patients_dic
 
 def pharmacies(user_id, user_password, pharm_code=''):
@@ -42,15 +25,8 @@ def pharmacies(user_id, user_password, pharm_code=''):
         var_url += f'?chave={user_id}&senha={user_password}'
         if pharm_code:
             var_url += f'&codigo={pharm_code}' 
-    inicio = time.time()
     pharmacies = requests.get(var_url)
     pharmacies_dic = pharmacies.json()
-    # print(cotacoes_dic)
-    fim = time.time()
-    hora = time.strftime("%Y-%m-%d %H:%M:%S", localtime())
-    # print(fim-inicio)
-    # print(hora)
-    # print(pharmacies_dic)
     return pharmacies_dic
 
 def transactions(user_id, user_password, trans_code='', trans_first_name='', trans_last_name='', trans_city=''):
@@ -65,15 +41,8 @@ def transactions(user_id, user_password, trans_code='', trans_first_name='', tra
             var_url += f'&sobrenome={trans_last_name}' 
         if trans_city:
             var_url += f'&cidade={trans_city}' 
-    inicio = time.time()
     transactions = requests.get(var_url)
     transactions_dic = transactions.json()
-    # print(cotacoes_dic)
-    fim = time.time()
-    hora = time.strftime("%Y-%m-%d %H:%M:%S", localtime())
-    # print(fim-inicio)
-    # print(hora)
-    # print(transactions_dic)
     return transactions_dic
 
 user_id = "USER0001"
@@ -88,7 +57,7 @@ trans_last_name = "TEIXEIRA"
 trans_city = "CAMPINAS"
 
 # Consultar Pacientes ( totos ou código específico )
-# print(patients(user_id, user_password))
+print(patients(user_id, user_password))
 # print(patients(user_id, user_password, patient_code))
 
 # Consultar Farmácia ( todas ou código específico )
@@ -104,7 +73,7 @@ trans_city = "CAMPINAS"
 # print(transactions(user_id, user_password, trans_first_name=trans_first_name)) # passar o primeiro nome com o nome do argumento
 # print(transactions(user_id, user_password, trans_last_name=trans_last_name)) # passar o sobrenome com o nome do argumento
 # print(transactions(user_id, user_password, trans_city=trans_city)) # passar a cidade com o nome do argumento
-print(transactions(user_id, user_password, trans_last_name=trans_last_name, trans_city=trans_city)) # exemplo de combinação de sobrenome e nome da cidade
+# print(transactions(user_id, user_password, trans_last_name=trans_last_name, trans_city=trans_city)) # exemplo de combinação de sobrenome e nome da cidade
 
 # Criar Usuário -- Esta função retorna o ID atribuído ao novo usuário
 # print(new_user("Du", "123456"))
